@@ -292,8 +292,10 @@ python backend_api.py --port 6006 --timeout 30000 --debug --model=gpt2 --gpu=0
 ```
 ## Best Model
 You can Download the best-trained model results through this link:
+
 中文AIGC检测[SeqXGPTcn](https://pan.baidu.com/s/1LmqOoLYGzIkSdxSf6eEsjw提取码：o8yi)、
-非中文AIGC检测[SeqXGPTncn](https://pan.baidu.com/s/18hN8VUiJvS_xg013_zBqHA 提取码：vbtx)
+
+非中文AIGC检测[SeqXGPTncn](https://pan.baidu.com/s/18hN8VUiJvS_xg013_zBqHA提取码：vbtx)
 
 Put the best-trained model into  `SeqXGPT`.
 ## Feature Extraction
