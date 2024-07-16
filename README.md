@@ -1,4 +1,5 @@
 # 1、MultiModal-DeepFake PyTorch code for DGM4
+## Path：MultiModalDeepFakemain\code
 ## Dataset Preparation
 
 ### A brief introduction
@@ -71,18 +72,18 @@ Where `id` is the original news-id in the VisualNews Repository, `image` is the 
 ### Prepare data
 Download the DGM<sup>4</sup> dataset through this link: [DGM4](https://huggingface.co/datasets/rshaojimmy/DGM4)
 
-Download the pre-trained bert-base-uncased through this link: [bert-base-uncased](https://modelscope.cn/models/AI-ModelScope/bert-base-uncased/files)
+Download the pre-trained bert-base-uncased through this link: [Bert-base-uncased](https://modelscope.cn/models/AI-ModelScope/bert-base-uncased/files)
 
 Then download the pre-trained model through this link: [ALBEF_4M.pth](https://storage.googleapis.com/sfr-pcl-data-research/ALBEF/ALBEF_4M.pth) (refer to [ALBEF](https://github.com/salesforce/ALBEF))
 
-You can Download the best-trained HAMMER results through this link: [HAMMER](https://pan.baidu.com/s/1xf3Nl_xifYMNAr-QOEnWxg提取码：ozjo)
+You can download the best HAMMER-PLUS model through this link: [HAMMER](https://pan.baidu.com/s/1xf3Nl_xifYMNAr-QOEnWxg提取码：ozjo)
 
-Put the dataset into a `MultiModalDeepFakemain/code/datasets` folder at the same root of `./code`, put the `results` and `pre-trained bert-base-uncased`  into `MultiModalDeepFakemain/code`. and put the `ALBEF_4M.pth` checkpoint into `MultiModalDeepFakemain/code/`. After unzip all sub files, 
+Put the dataset into a `MultiModalDeepFakemain` folder at the same root of `./code`, put the `results` and `pre-trained bert-base-uncased`  into `MultiModalDeepFakemain/code`. and put the `ALBEF_4M.pth` checkpoint into `MultiModalDeepFakemain/code/`. After unzip all sub files, 
 the structure of the code and the dataset should be as follows:
 
 
 ```
-./
+MultiModalDeepFakemain
 ├── code
 │  ├── configs
 │  │   
@@ -147,7 +148,7 @@ the structure of the code and the dataset should be as follows:
 
 
 ## Training
-
+cd MultiModalDeepFakemain/code
 Modify `train.sh` and run:
 ```
 sh train.sh
@@ -157,23 +158,24 @@ You can change the network and optimization configurations by modifying the conf
 
 
 ## Testing
+cd MultiModalDeepFakemain/code
 Modify `test.sh` and run:
 ```
 sh test.sh
 ```
 # 2、Ten Words Only Still Help:* Improving Black-Box AI-Generated Text Detection via Proxy-Guided Efficient Re-Sampling
+## Path：POGERmain
 ## Datasets
 The binary, multiclass and OOD AIGT datasets are available at [Google Drive](https://drive.google.com/drive/folders/1xxdjZedn7le_P1HunCDF_WCuoFYI0-pz?usp=sharing).
 ## pre-trained model
 Download the pre-trained roberta-base through this link: [roberta-base](https://huggingface.co/FacebookAI/roberta-base/tree/main)
-You can Download the best-trained model results through this link: [POGER](https://pan.baidu.com/s/1LARvuzHD0phivBw_8FfIyw提取码：gbk)
+
+You can Download the best-trained model through this link: [POGER](https://pan.baidu.com/s/1LARvuzHD0phivBw_8FfIyw提取码：gbk)
 
 Put the best-trained model into  `POGERmain/POGER/params`.
 
 ## Run
 ### 1. Preprocess
-> This step is optional, as processed POGER Features and POGER-Mixture Features can be downloaded at [Google Drive](https://drive.google.com/drive/folders/1xxdjZedn7le_P1HunCDF_WCuoFYI0-pz?usp=sharing).
-
 #### Obtain POGER Features
 
 ``` shell
@@ -197,7 +199,6 @@ python get_poger_feature.py \
 
 #### Obtain POGER-Mixture Features
 ##### Inference on white-box LLMs
-> This part of the code is modified from [Jihuai-wpy/SeqXGPT](https://github.com/Jihuai-wpy/SeqXGPT) under the [Apache License 2.0](https://github.com/Jihuai-wpy/SeqXGPT/blob/main/LICENSE).
 
 ``` shell
 cd POGERmain/get_feature/get_true_prob
@@ -268,53 +269,14 @@ python main.py \
 ```
 
 # 3、SeqXGPT
+## Path：SeqXGPT
 ## Datasets
 
-Each dataset contains six files. Within each dataset folder, based on the source of AI-generated sentences in the document, they are organized into different files. You can refer to the requirements of different tasks in the paper to arrange and merge the files. Below are SeqXGPT-Bench and two important evaluation datasets.
-You can download the SeqXGPT<sup>4</sup> dataset through this link: [SeqXGPT](https://github.com/OpenLMLab/Sniffer/tree/main/SnifferBench)
+The dataset is divided into Chinese and English datasets, and in each dataset, they are organized into different files based on the sources of AI generated sentences in the documents. You can refer to the requirements of different tasks in this article to arrange and merge files. 
+You can download the SeqXGPT dataset through the following link:[SeqXGPT](https://pan.baidu.com/s/1iqOBFjVtn3S1kQ-mqsq3kQ提取码：0wbf)
 
-### SeqXGPT-Bench
-
-A sentence-level AI-generated text (AIGT) detection dataset used for the study of fine-grained AIGT detection.
-
-**data format:**
-
-```python
-{
-    "text": "Media playback is unsupported on your device 21 June 2013 Last updated at 12:31 BST The Market Hall Cinema in Brynmawr used to be run by the local council but when it announced its funding would stop last month, work began to find a way to keep it going. Thanks to the efforts of a group of local volunteers, the cinema has been saved and reopened under a new community initiative. The group, called \"Brynmawr Foundation\", raised enough funds to take over the lease of the building and purchase new equipment. They plan to show a mix of classic and new films, as well as host events and live performances. The Market Hall Cinema has been an important part of the town's history since it first opened in 1894, and this new initiative ensures that it will continue to be a valuable resource for the community.", 
-    "prompt_len": 254, 
-    "label": "gpt3re"
-}
-```
-
-​	**`text`** refers to an entire document.
-
-​	**`prompt_len`** marks the boundary between the sentences generated by humans and those generated by AI. The first `prompt_len` characters of the input `text`, i.e., *text[:prompt\_len]*, are the sentences generated by humans, while the rest are generated by a particular language model.
-
-​	**`label`** is the label for each sentence, and there are six types of labels in total: `gpt2`, `gptneo`, `gptj`, `llama`, `gpt3re`, `human`.
-
-### Document-Level Detection Dataset
-
-A dataset used to evaluate the performance of various methods in document-level AIGT detection.
-
-**data format:**
-
-```python
-{
-    "text": "in this paper we consider the possible existence of unstable axisymmetric modes in kerr space times , resulting from exponentially growing solutions of the teukolsky equation .  we describe a transformation that casts the radial equation that results upon separation of variables in the teukolsky equation , in the form of a schrdinger equation , and combine the properties of the solutions of this equations with some recent results on the asymptotic behaviour of spin weighted spheroidal harmonics to prove the existence of an infinite family of unstable modes .  thus we prove that the stationary region beyond a kerr black hole inner horizon is unstable under gravitational linear perturbations .  we also prove that kerr space - time with angular momentum larger than its square mass , which has a naked singularity , is unstable .", 
-    "label": "human"
-}
-```
-
-​	**`text`** refers to an entire document.
-
-​	**`label`** is the label for the document, and there are six types of labels in total: `gpt2`, `gptneo`, `gptj`, `llama`, `gpt3re`, `human`.
-
-### OOD Sentence-Level Detection Dataset
-
-A dataset used to evaluate the performance of various methods on OOD data.
-
-**data format** is the same as the data format of [SeqXGPT-Bench](#seqxgpt-bench).
+Unzip the dataset.Put the dataset into  `SeqXGPT/dataset`.
+ 
 
 ## Inference Server
 
@@ -323,13 +285,14 @@ We use four open-source (L)LMs to construct the original features of our SeqXGPT
 You can launch the inference server through `backend_api.py`. The startup command is as follows:
 
 ```bash
+cd SeqXgpt
 # --model: [gpt2, gptneo, gptj, llama, t5]
 
 python backend_api.py --port 6006 --timeout 30000 --debug --model=gpt2 --gpu=0
 ```
 ## Best Model
-You can Download the best-trained model results through this link: [SeqXGPTcn](https://pan.baidu.com/s/1LmqOoLYGzIkSdxSf6eEsjw提取码：o8yi)
-[SeqXGPTen](链接：https://pan.baidu.com/s/1LmqOoLYGzIkSdxSf6eEsjw 提取码：o8yi)
+You can Download the best-trained model results through this link: [SeqXGPTcn](https://pan.baidu.com/s/1LmqOoLYGzIkSdxSf6eEsjw提取码：o8yi)、[SeqXGPTen](链接：https://pan.baidu.com/s/1LmqOoLYGzIkSdxSf6eEsjw提取码：o8yi)
+
 Put the best-trained model into  `SeqXGPT`.
 ## Feature Extraction
 
